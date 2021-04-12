@@ -1,0 +1,952 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EpitaxySQLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Layer">
+          <Key>
+            <PropertyRef Name="Layer ID" />
+          </Key>
+          <Property Name="Layer ID" Type="int" Nullable="false" />
+          <Property Name="Run ID" Type="int" />
+          <Property Name="nIndex" Type="int" />
+          <Property Name="Material" Type="nvarchar" MaxLength="50" />
+          <Property Name="Growth Time" Type="float" />
+          <Property Name="Res 1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Res 2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Growth Temperature" Type="float" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Layer Result">
+          <Key>
+            <PropertyRef Name="Result ID" />
+          </Key>
+          <Property Name="Result ID" Type="int" Nullable="false" />
+          <Property Name="Layer ID" Type="int" />
+          <Property Name="Value" Type="float" />
+          <Property Name="Units" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Technique" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+          <Property Name="Exclude" Type="bit" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Pocket">
+          <Key>
+            <PropertyRef Name="Pocket ID" />
+          </Key>
+          <Property Name="Pocket ID" Type="int" Nullable="false" />
+          <Property Name="Run ID" Type="int" />
+          <Property Name="Pocket Pos" Type="int" />
+          <Property Name="Wafer ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Wafer Prep" Type="nvarchar" MaxLength="100" />
+          <Property Name="Size" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surfscan Density" Type="float" />
+          <Property Name="Surfscan Count" Type="float" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="Res 1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Release To" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status Change Date" Type="datetime" />
+          <Property Name="Release Batch" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROMIS Transact Date" Type="datetime" />
+          <Property Name="PROMIS Part ID" Type="int" />
+          <Property Name="PROMIS Component" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROMIS Wafer ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROMIS Designation" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROMIS Transfer" Type="bit" />
+          <Property Name="PROMIS Lot Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROMIS Scrap Code ID" Type="int" />
+          <Property Name="PROMIS Scrap Report ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Substrate Part ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prepped" Type="nchar" MaxLength="10" />
+          <Property Name="Loaded" Type="nchar" MaxLength="10" />
+          <Property Name="Unloaded" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PROMIS Part">
+          <Key>
+            <PropertyRef Name="Part ID" />
+          </Key>
+          <Property Name="Part ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Part Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Part Name" Type="nvarchar" MaxLength="64" />
+          <Property Name="Part PROMIS Batch Prefix" Type="nvarchar" MaxLength="50" />
+          <Property Name="Part Prod" Type="bit" />
+          <Property Name="Part Current" Type="bit" />
+          <Property Name="Template Path" Type="nvarchar" MaxLength="250" />
+          <Property Name="Material" Type="nvarchar" MaxLength="16" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Material Options" Type="nvarchar" MaxLength="300" />
+          <Property Name="Unidentified Part Number" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="QW Xray">
+          <Key>
+            <PropertyRef Name="QW Xray ID" />
+          </Key>
+          <Property Name="QW Xray ID" Type="int" Nullable="false" />
+          <Property Name="Pocket ID" Type="int" />
+          <Property Name="QWQB" Type="float" />
+          <Property Name="ZOM" Type="float" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Reactor">
+          <Key>
+            <PropertyRef Name="Reactor ID" />
+          </Key>
+          <Property Name="Reactor ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reactor Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="TEM Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="POP Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="RTPL Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="Reflectivity Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="LTPL Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="x-ray Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="SIMS Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="CV Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="TEM Images Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="Datasheet Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="Databook Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="Datasheet Archive Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="Recipe Reader Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="Recipe Archive Path" Type="nvarchar" MaxLength="100" />
+          <Property Name="Max Loading" Type="int" />
+          <Property Name="PROMIS Location" Type="nvarchar" MaxLength="100" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="SurfScan Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="Tool Owner" Type="nchar" MaxLength="14" />
+          <Property Name="XPS Path" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EpitaxySQL.dbo.ReactorEx' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReactorEx">
+          <Key>
+            <PropertyRef Name="Reactor ID" />
+            <PropertyRef Name="RequirePO" />
+          </Key>
+          <Property Name="Reactor ID" Type="int" Nullable="false" />
+          <Property Name="RequirePO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reagent Avail">
+          <Key>
+            <PropertyRef Name="Reagent Avail ID" />
+          </Key>
+          <Property Name="Reagent Avail ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reactor ID" Type="int" />
+          <Property Name="Reagent ID" Type="int" />
+          <Property Name="Source Avail" Type="bit" />
+          <Property Name="Dilution Avail" Type="bit" />
+          <Property Name="Pusher Avail" Type="bit" />
+          <Property Name="Inject Avail" Type="bit" />
+          <Property Name="Pressure Avail" Type="bit" />
+          <Property Name="EPISON Avail" Type="bit" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Reagent State">
+          <Key>
+            <PropertyRef Name="State ID" />
+          </Key>
+          <Property Name="State ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Layer ID" Type="int" />
+          <Property Name="Reagent ID" Type="int" />
+          <Property Name="Source" Type="float" />
+          <Property Name="Dilution" Type="float" />
+          <Property Name="Pusher" Type="float" />
+          <Property Name="Inject" Type="float" />
+          <Property Name="Pressure" Type="float" />
+          <Property Name="EPISON Control" Type="bit" />
+          <Property Name="Bulk_SetConc" Type="float" />
+        </EntityType>
+        <EntityType Name="Reagents">
+          <Key>
+            <PropertyRef Name="Reagent ID" />
+          </Key>
+          <Property Name="Reagent ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reagent Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Run">
+          <Key>
+            <PropertyRef Name="Run ID" />
+          </Key>
+          <Property Name="Run ID" Type="int" Nullable="false" />
+          <Property Name="Reactor ID" Type="int" />
+          <Property Name="Descriptor" Type="int" />
+          <Property Name="Run Date" Type="datetime" />
+          <Property Name="Start Time" Type="datetime" />
+          <Property Name="End Time" Type="datetime" />
+          <Property Name="Growth Temp" Type="float" />
+          <Property Name="Growth Press" Type="float" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="255" />
+          <Property Name="Res 1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Res 2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Res 3" Type="float" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Wafer Size" Type="nvarchar" MaxLength="50" />
+          <Property Name="Collector Purge" Type="nvarchar" MaxLength="50" />
+          <Property Name="AsH3 source" Type="nvarchar" MaxLength="50" />
+          <Property Name="Batch Size" Type="int" />
+          <Property Name="Run in Batch" Type="int" />
+          <Property Name="Load Lock" Type="nvarchar" MaxLength="50" />
+          <Property Name="Platten Pos" Type="int" />
+          <Property Name="Target Depl Depth" Type="float" />
+          <Property Name="Arsine Cons" Type="float" />
+          <Property Name="Phosphine Cons" Type="float" />
+          <Property Name="BatchID" Type="nvarchar" MaxLength="50" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="TDS_Upload" Type="bit" />
+          <Property Name="TDS_UploadDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Wafer Map">
+          <Key>
+            <PropertyRef Name="Map ID" />
+          </Key>
+          <Property Name="Map ID" Type="int" Nullable="false" />
+          <Property Name="Pocket ID" Type="int" />
+          <Property Name="Center Val" Type="float" />
+          <Property Name="Average Val" Type="float" />
+          <Property Name="SD" Type="float" />
+          <Property Name="Edge Exclusion" Type="float" />
+          <Property Name="Spec Band" Type="nvarchar" MaxLength="50" />
+          <Property Name="Area in Spec" Type="float" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="Layer Result_FK00">
+          <End Role="Layer" Type="Self.Layer" Multiplicity="0..1" />
+          <End Role="Layer Result" Type="Self.Layer Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layer">
+              <PropertyRef Name="Layer ID" />
+            </Principal>
+            <Dependent Role="Layer Result">
+              <PropertyRef Name="Layer ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pocket_FK00">
+          <End Role="PROMIS Part" Type="Self.PROMIS Part" Multiplicity="0..1" />
+          <End Role="Pocket" Type="Self.Pocket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROMIS Part">
+              <PropertyRef Name="Part ID" />
+            </Principal>
+            <Dependent Role="Pocket">
+              <PropertyRef Name="PROMIS Part ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reagent Avail_FK00">
+          <End Role="Reactor" Type="Self.Reactor" Multiplicity="0..1" />
+          <End Role="Reagent Avail" Type="Self.Reagent Avail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reactor">
+              <PropertyRef Name="Reactor ID" />
+            </Principal>
+            <Dependent Role="Reagent Avail">
+              <PropertyRef Name="Reactor ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reagent State_FK00">
+          <End Role="Layer" Type="Self.Layer" Multiplicity="0..1" />
+          <End Role="Reagent State" Type="Self.Reagent State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layer">
+              <PropertyRef Name="Layer ID" />
+            </Principal>
+            <Dependent Role="Reagent State">
+              <PropertyRef Name="Layer ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reagent State_FK01">
+          <End Role="Reagents" Type="Self.Reagents" Multiplicity="0..1" />
+          <End Role="Reagent State" Type="Self.Reagent State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reagents">
+              <PropertyRef Name="Reagent ID" />
+            </Principal>
+            <Dependent Role="Reagent State">
+              <PropertyRef Name="Reagent ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Run_FK00">
+          <End Role="Reactor" Type="Self.Reactor" Multiplicity="0..1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reactor">
+              <PropertyRef Name="Reactor ID" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="Reactor ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Wafer Map_FK00">
+          <End Role="Pocket" Type="Self.Pocket" Multiplicity="0..1" />
+          <End Role="Wafer Map" Type="Self.Wafer Map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pocket">
+              <PropertyRef Name="Pocket ID" />
+            </Principal>
+            <Dependent Role="Wafer Map">
+              <PropertyRef Name="Pocket ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EpitaxySQLModelStoreContainer">
+          <EntitySet Name="Layer" EntityType="Self.Layer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Layer Result" EntityType="Self.Layer Result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pocket" EntityType="Self.Pocket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROMIS Part" EntityType="Self.PROMIS Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QW Xray" EntityType="Self.QW Xray" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reactor" EntityType="Self.Reactor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reagent Avail" EntityType="Self.Reagent Avail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reagent State" EntityType="Self.Reagent State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reagents" EntityType="Self.Reagents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Run" EntityType="Self.Run" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wafer Map" EntityType="Self.Wafer Map" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReactorEx" EntityType="Self.ReactorEx" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReactorEx].[Reactor ID] AS [Reactor ID], 
+    [ReactorEx].[RequirePO] AS [RequirePO]
+    FROM [dbo].[ReactorEx] AS [ReactorEx]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Layer Result_FK00" Association="Self.Layer Result_FK00">
+            <End Role="Layer" EntitySet="Layer" />
+            <End Role="Layer Result" EntitySet="Layer Result" />
+          </AssociationSet>
+          <AssociationSet Name="Pocket_FK00" Association="Self.Pocket_FK00">
+            <End Role="PROMIS Part" EntitySet="PROMIS Part" />
+            <End Role="Pocket" EntitySet="Pocket" />
+          </AssociationSet>
+          <AssociationSet Name="Reagent Avail_FK00" Association="Self.Reagent Avail_FK00">
+            <End Role="Reactor" EntitySet="Reactor" />
+            <End Role="Reagent Avail" EntitySet="Reagent Avail" />
+          </AssociationSet>
+          <AssociationSet Name="Reagent State_FK00" Association="Self.Reagent State_FK00">
+            <End Role="Layer" EntitySet="Layer" />
+            <End Role="Reagent State" EntitySet="Reagent State" />
+          </AssociationSet>
+          <AssociationSet Name="Reagent State_FK01" Association="Self.Reagent State_FK01">
+            <End Role="Reagents" EntitySet="Reagents" />
+            <End Role="Reagent State" EntitySet="Reagent State" />
+          </AssociationSet>
+          <AssociationSet Name="Run_FK00" Association="Self.Run_FK00">
+            <End Role="Reactor" EntitySet="Reactor" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
+          <AssociationSet Name="Wafer Map_FK00" Association="Self.Wafer Map_FK00">
+            <End Role="Pocket" EntitySet="Pocket" />
+            <End Role="Wafer Map" EntitySet="Wafer Map" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EpitaxySQLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Layer">
+          <Key>
+            <PropertyRef Name="Layer_ID" />
+          </Key>
+          <Property Name="Layer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Run_ID" Type="Int32" />
+          <Property Name="nIndex" Type="Int32" />
+          <Property Name="Material" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Growth_Time" Type="Double" />
+          <Property Name="Res_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Res_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Growth_Temperature" Type="Double" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Layer_Result" Relationship="Self.Layer_Result_FK00" FromRole="Layer" ToRole="Layer_Result" />
+          <NavigationProperty Name="Reagent_State" Relationship="Self.Reagent_State_FK00" FromRole="Layer" ToRole="Reagent_State" />
+        </EntityType>
+        <EntityType Name="Layer_Result">
+          <Key>
+            <PropertyRef Name="Result_ID" />
+          </Key>
+          <Property Name="Result_ID" Type="Int32" Nullable="false" />
+          <Property Name="Layer_ID" Type="Int32" />
+          <Property Name="Value" Type="Double" />
+          <Property Name="Units" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Technique" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Exclude" Type="Boolean" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Layer" Relationship="Self.Layer_Result_FK00" FromRole="Layer_Result" ToRole="Layer" />
+        </EntityType>
+        <EntityType Name="Pocket">
+          <Key>
+            <PropertyRef Name="Pocket_ID" />
+          </Key>
+          <Property Name="Pocket_ID" Type="Int32" Nullable="false" />
+          <Property Name="Run_ID" Type="Int32" />
+          <Property Name="Pocket_Pos" Type="Int32" />
+          <Property Name="Wafer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Wafer_Prep" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surfscan_Density" Type="Double" />
+          <Property Name="Surfscan_Count" Type="Double" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Res_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Release_To" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Change_Date" Type="DateTime" Precision="3" />
+          <Property Name="Release_Batch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROMIS_Transact_Date" Type="DateTime" Precision="3" />
+          <Property Name="PROMIS_Part_ID" Type="Int32" />
+          <Property Name="PROMIS_Component" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROMIS_Wafer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROMIS_Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROMIS_Transfer" Type="Boolean" />
+          <Property Name="PROMIS_Lot_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROMIS_Scrap_Code_ID" Type="Int32" />
+          <Property Name="PROMIS_Scrap_Report_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Substrate_Part_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prepped" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Loaded" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Unloaded" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PROMIS_Part" Relationship="Self.Pocket_FK00" FromRole="Pocket" ToRole="PROMIS_Part" />
+          <NavigationProperty Name="Wafer_Map" Relationship="Self.Wafer_Map_FK00" FromRole="Pocket" ToRole="Wafer_Map" />
+        </EntityType>
+        <EntityType Name="PROMIS_Part">
+          <Key>
+            <PropertyRef Name="Part_ID" />
+          </Key>
+          <Property Name="Part_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Part_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Part_Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Part_PROMIS_Batch_Prefix" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Part_Prod" Type="Boolean" />
+          <Property Name="Part_Current" Type="Boolean" />
+          <Property Name="Template_Path" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Material" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Material_Options" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Unidentified_Part_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pockets" Relationship="Self.Pocket_FK00" FromRole="PROMIS_Part" ToRole="Pocket" />
+        </EntityType>
+        <EntityType Name="QW_Xray">
+          <Key>
+            <PropertyRef Name="QW_Xray_ID" />
+          </Key>
+          <Property Name="QW_Xray_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pocket_ID" Type="Int32" />
+          <Property Name="QWQB" Type="Double" />
+          <Property Name="ZOM" Type="Double" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Reactor">
+          <Key>
+            <PropertyRef Name="Reactor_ID" />
+          </Key>
+          <Property Name="Reactor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reactor_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TEM_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="POP_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RTPL_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Reflectivity_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LTPL_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="x_ray_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SIMS_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CV_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TEM_Images_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Datasheet_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Databook_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Datasheet_Archive_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Recipe_Reader_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Recipe_Archive_Path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Max_Loading" Type="Int32" />
+          <Property Name="PROMIS_Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SurfScan_Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Tool_Owner" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="XPS_Path" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Reagent_Avail" Relationship="Self.Reagent_Avail_FK00" FromRole="Reactor" ToRole="Reagent_Avail" />
+          <NavigationProperty Name="Runs" Relationship="Self.Run_FK00" FromRole="Reactor" ToRole="Run" />
+        </EntityType>
+        <EntityType Name="Reagent_Avail">
+          <Key>
+            <PropertyRef Name="Reagent_Avail_ID" />
+          </Key>
+          <Property Name="Reagent_Avail_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reactor_ID" Type="Int32" />
+          <Property Name="Reagent_ID" Type="Int32" />
+          <Property Name="Source_Avail" Type="Boolean" />
+          <Property Name="Dilution_Avail" Type="Boolean" />
+          <Property Name="Pusher_Avail" Type="Boolean" />
+          <Property Name="Inject_Avail" Type="Boolean" />
+          <Property Name="Pressure_Avail" Type="Boolean" />
+          <Property Name="EPISON_Avail" Type="Boolean" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Reactor" Relationship="Self.Reagent_Avail_FK00" FromRole="Reagent_Avail" ToRole="Reactor" />
+        </EntityType>
+        <EntityType Name="Reagent_State">
+          <Key>
+            <PropertyRef Name="State_ID" />
+          </Key>
+          <Property Name="State_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Layer_ID" Type="Int32" />
+          <Property Name="Reagent_ID" Type="Int32" />
+          <Property Name="Source" Type="Double" />
+          <Property Name="Dilution" Type="Double" />
+          <Property Name="Pusher" Type="Double" />
+          <Property Name="Inject" Type="Double" />
+          <Property Name="Pressure" Type="Double" />
+          <Property Name="EPISON_Control" Type="Boolean" />
+          <Property Name="Bulk_SetConc" Type="Double" />
+          <NavigationProperty Name="Layer" Relationship="Self.Reagent_State_FK00" FromRole="Reagent_State" ToRole="Layer" />
+          <NavigationProperty Name="Reagent" Relationship="Self.Reagent_State_FK01" FromRole="Reagent_State" ToRole="Reagents" />
+        </EntityType>
+        <EntityType Name="Reagent">
+          <Key>
+            <PropertyRef Name="Reagent_ID" />
+          </Key>
+          <Property Name="Reagent_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reagent_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Reagent_State" Relationship="Self.Reagent_State_FK01" FromRole="Reagents" ToRole="Reagent_State" />
+        </EntityType>
+        <EntityType Name="Run">
+          <Key>
+            <PropertyRef Name="Run_ID" />
+          </Key>
+          <Property Name="Run_ID" Type="Int32" Nullable="false" />
+          <Property Name="Reactor_ID" Type="Int32" />
+          <Property Name="Descriptor" Type="Int32" />
+          <Property Name="Run_Date" Type="DateTime" Precision="3" />
+          <Property Name="Start_Time" Type="DateTime" Precision="3" />
+          <Property Name="End_Time" Type="DateTime" Precision="3" />
+          <Property Name="Growth_Temp" Type="Double" />
+          <Property Name="Growth_Press" Type="Double" />
+          <Property Name="Purpose" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Res_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Res_2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Res_3" Type="Double" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Wafer_Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Collector_Purge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AsH3_source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Batch_Size" Type="Int32" />
+          <Property Name="Run_in_Batch" Type="Int32" />
+          <Property Name="Load_Lock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Platten_Pos" Type="Int32" />
+          <Property Name="Target_Depl_Depth" Type="Double" />
+          <Property Name="Arsine_Cons" Type="Double" />
+          <Property Name="Phosphine_Cons" Type="Double" />
+          <Property Name="BatchID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Reactor" Relationship="Self.Run_FK00" FromRole="Run" ToRole="Reactor" />
+          <Property Name="TDS_Upload" Type="Boolean" />
+          <Property Name="TDS_UploadDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Wafer_Map">
+          <Key>
+            <PropertyRef Name="Map_ID" />
+          </Key>
+          <Property Name="Map_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pocket_ID" Type="Int32" />
+          <Property Name="Center_Val" Type="Double" />
+          <Property Name="Average_Val" Type="Double" />
+          <Property Name="SD" Type="Double" />
+          <Property Name="Edge_Exclusion" Type="Double" />
+          <Property Name="Spec_Band" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area_in_Spec" Type="Double" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Pocket" Relationship="Self.Wafer_Map_FK00" FromRole="Wafer_Map" ToRole="Pocket" />
+        </EntityType>
+        <EntityType Name="ReactorEx">
+          <Key>
+            <PropertyRef Name="Reactor_ID" />
+            <PropertyRef Name="RequirePO" />
+          </Key>
+          <Property Name="Reactor_ID" Type="Int32" Nullable="false" />
+          <Property Name="RequirePO" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="Layer_Result_FK00">
+          <End Role="Layer" Type="Self.Layer" Multiplicity="0..1" />
+          <End Role="Layer_Result" Type="Self.Layer_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layer">
+              <PropertyRef Name="Layer_ID" />
+            </Principal>
+            <Dependent Role="Layer_Result">
+              <PropertyRef Name="Layer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reagent_State_FK00">
+          <End Role="Layer" Type="Self.Layer" Multiplicity="0..1" />
+          <End Role="Reagent_State" Type="Self.Reagent_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Layer">
+              <PropertyRef Name="Layer_ID" />
+            </Principal>
+            <Dependent Role="Reagent_State">
+              <PropertyRef Name="Layer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pocket_FK00">
+          <End Role="PROMIS_Part" Type="Self.PROMIS_Part" Multiplicity="0..1" />
+          <End Role="Pocket" Type="Self.Pocket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROMIS_Part">
+              <PropertyRef Name="Part_ID" />
+            </Principal>
+            <Dependent Role="Pocket">
+              <PropertyRef Name="PROMIS_Part_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Wafer_Map_FK00">
+          <End Role="Pocket" Type="Self.Pocket" Multiplicity="0..1" />
+          <End Role="Wafer_Map" Type="Self.Wafer_Map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pocket">
+              <PropertyRef Name="Pocket_ID" />
+            </Principal>
+            <Dependent Role="Wafer_Map">
+              <PropertyRef Name="Pocket_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reagent_Avail_FK00">
+          <End Role="Reactor" Type="Self.Reactor" Multiplicity="0..1" />
+          <End Role="Reagent_Avail" Type="Self.Reagent_Avail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reactor">
+              <PropertyRef Name="Reactor_ID" />
+            </Principal>
+            <Dependent Role="Reagent_Avail">
+              <PropertyRef Name="Reactor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Run_FK00">
+          <End Role="Reactor" Type="Self.Reactor" Multiplicity="0..1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reactor">
+              <PropertyRef Name="Reactor_ID" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="Reactor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reagent_State_FK01">
+          <End Role="Reagents" Type="Self.Reagent" Multiplicity="0..1" />
+          <End Role="Reagent_State" Type="Self.Reagent_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reagents">
+              <PropertyRef Name="Reagent_ID" />
+            </Principal>
+            <Dependent Role="Reagent_State">
+              <PropertyRef Name="Reagent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EpitaxySQLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Layers" EntityType="Self.Layer" />
+          <EntitySet Name="Layer_Results" EntityType="Self.Layer_Result" />
+          <EntitySet Name="Pockets" EntityType="Self.Pocket" />
+          <EntitySet Name="PROMIS_Parts" EntityType="Self.PROMIS_Part" />
+          <EntitySet Name="QW_Xrays" EntityType="Self.QW_Xray" />
+          <EntitySet Name="Reactors" EntityType="Self.Reactor" />
+          <EntitySet Name="Reagent_Avails" EntityType="Self.Reagent_Avail" />
+          <EntitySet Name="Reagent_States" EntityType="Self.Reagent_State" />
+          <EntitySet Name="Reagents" EntityType="Self.Reagent" />
+          <EntitySet Name="Runs" EntityType="Self.Run" />
+          <EntitySet Name="Wafer_Maps" EntityType="Self.Wafer_Map" />
+          <EntitySet Name="ReactorExes" EntityType="Self.ReactorEx" />
+          <AssociationSet Name="Layer_Result_FK00" Association="Self.Layer_Result_FK00">
+            <End Role="Layer" EntitySet="Layers" />
+            <End Role="Layer_Result" EntitySet="Layer_Results" />
+          </AssociationSet>
+          <AssociationSet Name="Reagent_State_FK00" Association="Self.Reagent_State_FK00">
+            <End Role="Layer" EntitySet="Layers" />
+            <End Role="Reagent_State" EntitySet="Reagent_States" />
+          </AssociationSet>
+          <AssociationSet Name="Pocket_FK00" Association="Self.Pocket_FK00">
+            <End Role="PROMIS_Part" EntitySet="PROMIS_Parts" />
+            <End Role="Pocket" EntitySet="Pockets" />
+          </AssociationSet>
+          <AssociationSet Name="Wafer_Map_FK00" Association="Self.Wafer_Map_FK00">
+            <End Role="Pocket" EntitySet="Pockets" />
+            <End Role="Wafer_Map" EntitySet="Wafer_Maps" />
+          </AssociationSet>
+          <AssociationSet Name="Reagent_Avail_FK00" Association="Self.Reagent_Avail_FK00">
+            <End Role="Reactor" EntitySet="Reactors" />
+            <End Role="Reagent_Avail" EntitySet="Reagent_Avails" />
+          </AssociationSet>
+          <AssociationSet Name="Run_FK00" Association="Self.Run_FK00">
+            <End Role="Reactor" EntitySet="Reactors" />
+            <End Role="Run" EntitySet="Runs" />
+          </AssociationSet>
+          <AssociationSet Name="Reagent_State_FK01" Association="Self.Reagent_State_FK01">
+            <End Role="Reagents" EntitySet="Reagents" />
+            <End Role="Reagent_State" EntitySet="Reagent_States" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EpitaxySQLModelStoreContainer" CdmEntityContainer="EpitaxySQLEntities">
+          <EntitySetMapping Name="Layers">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Layer">
+              <MappingFragment StoreEntitySet="Layer">
+                <ScalarProperty Name="Layer_ID" ColumnName="Layer ID" />
+                <ScalarProperty Name="Run_ID" ColumnName="Run ID" />
+                <ScalarProperty Name="nIndex" ColumnName="nIndex" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Growth_Time" ColumnName="Growth Time" />
+                <ScalarProperty Name="Res_1" ColumnName="Res 1" />
+                <ScalarProperty Name="Res_2" ColumnName="Res 2" />
+                <ScalarProperty Name="Growth_Temperature" ColumnName="Growth Temperature" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Layer_Results">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Layer_Result">
+              <MappingFragment StoreEntitySet="Layer Result">
+                <ScalarProperty Name="Result_ID" ColumnName="Result ID" />
+                <ScalarProperty Name="Layer_ID" ColumnName="Layer ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Technique" ColumnName="Technique" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Exclude" ColumnName="Exclude" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pockets">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Pocket">
+              <MappingFragment StoreEntitySet="Pocket">
+                <ScalarProperty Name="Pocket_ID" ColumnName="Pocket ID" />
+                <ScalarProperty Name="Run_ID" ColumnName="Run ID" />
+                <ScalarProperty Name="Pocket_Pos" ColumnName="Pocket Pos" />
+                <ScalarProperty Name="Wafer_ID" ColumnName="Wafer ID" />
+                <ScalarProperty Name="Wafer_Prep" ColumnName="Wafer Prep" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Surfscan_Density" ColumnName="Surfscan Density" />
+                <ScalarProperty Name="Surfscan_Count" ColumnName="Surfscan Count" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Res_1" ColumnName="Res 1" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Release_To" ColumnName="Release To" />
+                <ScalarProperty Name="Status_Change_Date" ColumnName="Status Change Date" />
+                <ScalarProperty Name="Release_Batch" ColumnName="Release Batch" />
+                <ScalarProperty Name="PROMIS_Transact_Date" ColumnName="PROMIS Transact Date" />
+                <ScalarProperty Name="PROMIS_Part_ID" ColumnName="PROMIS Part ID" />
+                <ScalarProperty Name="PROMIS_Component" ColumnName="PROMIS Component" />
+                <ScalarProperty Name="PROMIS_Wafer_ID" ColumnName="PROMIS Wafer ID" />
+                <ScalarProperty Name="PROMIS_Designation" ColumnName="PROMIS Designation" />
+                <ScalarProperty Name="PROMIS_Transfer" ColumnName="PROMIS Transfer" />
+                <ScalarProperty Name="PROMIS_Lot_Name" ColumnName="PROMIS Lot Name" />
+                <ScalarProperty Name="PROMIS_Scrap_Code_ID" ColumnName="PROMIS Scrap Code ID" />
+                <ScalarProperty Name="PROMIS_Scrap_Report_ID" ColumnName="PROMIS Scrap Report ID" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+                <ScalarProperty Name="Substrate_Part_ID" ColumnName="Substrate Part ID" />
+                <ScalarProperty Name="Prepped" ColumnName="Prepped" />
+                <ScalarProperty Name="Loaded" ColumnName="Loaded" />
+                <ScalarProperty Name="Unloaded" ColumnName="Unloaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROMIS_Parts">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.PROMIS_Part">
+              <MappingFragment StoreEntitySet="PROMIS Part">
+                <ScalarProperty Name="Part_ID" ColumnName="Part ID" />
+                <ScalarProperty Name="Part_Number" ColumnName="Part Number" />
+                <ScalarProperty Name="Part_Name" ColumnName="Part Name" />
+                <ScalarProperty Name="Part_PROMIS_Batch_Prefix" ColumnName="Part PROMIS Batch Prefix" />
+                <ScalarProperty Name="Part_Prod" ColumnName="Part Prod" />
+                <ScalarProperty Name="Part_Current" ColumnName="Part Current" />
+                <ScalarProperty Name="Template_Path" ColumnName="Template Path" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+                <ScalarProperty Name="Material_Options" ColumnName="Material Options" />
+                <ScalarProperty Name="Unidentified_Part_Number" ColumnName="Unidentified Part Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QW_Xrays">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.QW_Xray">
+              <MappingFragment StoreEntitySet="QW Xray">
+                <ScalarProperty Name="QW_Xray_ID" ColumnName="QW Xray ID" />
+                <ScalarProperty Name="Pocket_ID" ColumnName="Pocket ID" />
+                <ScalarProperty Name="QWQB" ColumnName="QWQB" />
+                <ScalarProperty Name="ZOM" ColumnName="ZOM" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reactors">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Reactor">
+              <MappingFragment StoreEntitySet="Reactor">
+                <ScalarProperty Name="Reactor_ID" ColumnName="Reactor ID" />
+                <ScalarProperty Name="Reactor_Name" ColumnName="Reactor Name" />
+                <ScalarProperty Name="TEM_Path" ColumnName="TEM Path" />
+                <ScalarProperty Name="POP_Path" ColumnName="POP Path" />
+                <ScalarProperty Name="RTPL_Path" ColumnName="RTPL Path" />
+                <ScalarProperty Name="Reflectivity_Path" ColumnName="Reflectivity Path" />
+                <ScalarProperty Name="LTPL_Path" ColumnName="LTPL Path" />
+                <ScalarProperty Name="x_ray_Path" ColumnName="x-ray Path" />
+                <ScalarProperty Name="SIMS_Path" ColumnName="SIMS Path" />
+                <ScalarProperty Name="CV_Path" ColumnName="CV Path" />
+                <ScalarProperty Name="TEM_Images_Path" ColumnName="TEM Images Path" />
+                <ScalarProperty Name="Datasheet_Path" ColumnName="Datasheet Path" />
+                <ScalarProperty Name="Databook_Path" ColumnName="Databook Path" />
+                <ScalarProperty Name="Datasheet_Archive_Path" ColumnName="Datasheet Archive Path" />
+                <ScalarProperty Name="Recipe_Reader_Path" ColumnName="Recipe Reader Path" />
+                <ScalarProperty Name="Recipe_Archive_Path" ColumnName="Recipe Archive Path" />
+                <ScalarProperty Name="Max_Loading" ColumnName="Max Loading" />
+                <ScalarProperty Name="PROMIS_Location" ColumnName="PROMIS Location" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+                <ScalarProperty Name="SurfScan_Path" ColumnName="SurfScan Path" />
+                <ScalarProperty Name="Tool_Owner" ColumnName="Tool Owner" />
+                <ScalarProperty Name="XPS_Path" ColumnName="XPS Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reagent_Avails">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Reagent_Avail">
+              <MappingFragment StoreEntitySet="Reagent Avail">
+                <ScalarProperty Name="Reagent_Avail_ID" ColumnName="Reagent Avail ID" />
+                <ScalarProperty Name="Reactor_ID" ColumnName="Reactor ID" />
+                <ScalarProperty Name="Reagent_ID" ColumnName="Reagent ID" />
+                <ScalarProperty Name="Source_Avail" ColumnName="Source Avail" />
+                <ScalarProperty Name="Dilution_Avail" ColumnName="Dilution Avail" />
+                <ScalarProperty Name="Pusher_Avail" ColumnName="Pusher Avail" />
+                <ScalarProperty Name="Inject_Avail" ColumnName="Inject Avail" />
+                <ScalarProperty Name="Pressure_Avail" ColumnName="Pressure Avail" />
+                <ScalarProperty Name="EPISON_Avail" ColumnName="EPISON Avail" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reagent_States">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Reagent_State">
+              <MappingFragment StoreEntitySet="Reagent State">
+                <ScalarProperty Name="State_ID" ColumnName="State ID" />
+                <ScalarProperty Name="Layer_ID" ColumnName="Layer ID" />
+                <ScalarProperty Name="Reagent_ID" ColumnName="Reagent ID" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Dilution" ColumnName="Dilution" />
+                <ScalarProperty Name="Pusher" ColumnName="Pusher" />
+                <ScalarProperty Name="Inject" ColumnName="Inject" />
+                <ScalarProperty Name="Pressure" ColumnName="Pressure" />
+                <ScalarProperty Name="EPISON_Control" ColumnName="EPISON Control" />
+                <ScalarProperty Name="Bulk_SetConc" ColumnName="Bulk_SetConc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reagents">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Reagent">
+              <MappingFragment StoreEntitySet="Reagents">
+                <ScalarProperty Name="Reagent_ID" ColumnName="Reagent ID" />
+                <ScalarProperty Name="Reagent_Name" ColumnName="Reagent Name" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Runs">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Run">
+              <MappingFragment StoreEntitySet="Run">
+                <ScalarProperty Name="TDS_UploadDate" ColumnName="TDS_UploadDate" />
+                <ScalarProperty Name="TDS_Upload" ColumnName="TDS_Upload" />
+                <ScalarProperty Name="Run_ID" ColumnName="Run ID" />
+                <ScalarProperty Name="Reactor_ID" ColumnName="Reactor ID" />
+                <ScalarProperty Name="Descriptor" ColumnName="Descriptor" />
+                <ScalarProperty Name="Run_Date" ColumnName="Run Date" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start Time" />
+                <ScalarProperty Name="End_Time" ColumnName="End Time" />
+                <ScalarProperty Name="Growth_Temp" ColumnName="Growth Temp" />
+                <ScalarProperty Name="Growth_Press" ColumnName="Growth Press" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Res_1" ColumnName="Res 1" />
+                <ScalarProperty Name="Res_2" ColumnName="Res 2" />
+                <ScalarProperty Name="Res_3" ColumnName="Res 3" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Wafer_Size" ColumnName="Wafer Size" />
+                <ScalarProperty Name="Collector_Purge" ColumnName="Collector Purge" />
+                <ScalarProperty Name="AsH3_source" ColumnName="AsH3 source" />
+                <ScalarProperty Name="Batch_Size" ColumnName="Batch Size" />
+                <ScalarProperty Name="Run_in_Batch" ColumnName="Run in Batch" />
+                <ScalarProperty Name="Load_Lock" ColumnName="Load Lock" />
+                <ScalarProperty Name="Platten_Pos" ColumnName="Platten Pos" />
+                <ScalarProperty Name="Target_Depl_Depth" ColumnName="Target Depl Depth" />
+                <ScalarProperty Name="Arsine_Cons" ColumnName="Arsine Cons" />
+                <ScalarProperty Name="Phosphine_Cons" ColumnName="Phosphine Cons" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wafer_Maps">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.Wafer_Map">
+              <MappingFragment StoreEntitySet="Wafer Map">
+                <ScalarProperty Name="Map_ID" ColumnName="Map ID" />
+                <ScalarProperty Name="Pocket_ID" ColumnName="Pocket ID" />
+                <ScalarProperty Name="Center_Val" ColumnName="Center Val" />
+                <ScalarProperty Name="Average_Val" ColumnName="Average Val" />
+                <ScalarProperty Name="SD" ColumnName="SD" />
+                <ScalarProperty Name="Edge_Exclusion" ColumnName="Edge Exclusion" />
+                <ScalarProperty Name="Spec_Band" ColumnName="Spec Band" />
+                <ScalarProperty Name="Area_in_Spec" ColumnName="Area in Spec" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReactorExes">
+            <EntityTypeMapping TypeName="EpitaxySQLModel.ReactorEx">
+              <MappingFragment StoreEntitySet="ReactorEx">
+                <ScalarProperty Name="Reactor_ID" ColumnName="Reactor ID" />
+                <ScalarProperty Name="RequirePO" ColumnName="RequirePO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
